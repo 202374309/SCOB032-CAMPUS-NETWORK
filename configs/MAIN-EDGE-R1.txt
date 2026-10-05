@@ -1,0 +1,112 @@
+MAIN-EDGE-R1#show running-config
+Building configuration...
+
+Current configuration : 1514 bytes
+!
+version 15.1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname MAIN-EDGE-R1
+!
+!
+!
+enable secret <REDACTED>
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username netadmin secret <REDACTED>
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524775G-
+license boot module c2900 technology-package securityk9 disable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name unilim.local
+!
+!
+spanning-tree mode pvst
+!
+class-map match-all VOICE-RTP
+ match access-group 120
+!
+policy-map WAN-QOS
+ class VOICE-RTP
+  priority percent 20
+  set ip dscp ef
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 172.16.0.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.16.1.1 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip nat inside source list 1 interface GigabitEthernet0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 172.16.0.1 
+ip route 10.10.0.0 255.255.0.0 172.16.1.2 
+!
+ip flow-export version 9
+!
+!
+access-list 110 permit ip 10.10.0.0 0.0.255.255 10.20.0.0 0.0.255.255
+access-list 120 permit udp any any range 16384 32767
+access-list 1 permit 10.10.0.0 0.0.255.255
+!
+!
+!
+!
+snmp-server community <REDACTED> RO
+!
+logging 10.10.9.103
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+ntp server 10.10.9.103
+!
+end

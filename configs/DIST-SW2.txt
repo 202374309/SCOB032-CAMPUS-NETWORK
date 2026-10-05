@@ -1,0 +1,346 @@
+DIST-SW2#show running-config
+Building configuration...
+
+Current configuration : 7396 bytes
+!
+version 12.2(37)SE1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname DIST-SW2
+!
+!
+no profinet
+enable secret 5 $1$mERr$WKi/TnLpBM5ABxPqXWp33/
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+username netadmin secret 5 $1$mERr$y.po3dB8iHh//AT/iTgKD/
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name smartcampus.local
+!
+!
+spanning-tree mode pvst
+spanning-tree vlan 10,20,30,40,50,60,70,80,90,100,110,120,130,140 priority 28672
+!
+class-map match-any VOICE
+ match access-group 190
+!
+policy-map VOICE-QOS
+ class VOICE
+  priority percent 20
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130,140
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ switchport trunk allowed vlan 10,20,30,90,100,110,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/2
+ switchport trunk allowed vlan 10,30,40,90,100,110,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/3
+ switchport trunk allowed vlan 10,40,120
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/4
+ switchport trunk allowed vlan 10,30,50,90,100,110,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/5
+ switchport trunk allowed vlan 10,30,60,100,110,120,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/6
+ switchport trunk allowed vlan 10,60
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/7
+ switchport trunk allowed vlan 10,30,70,90,100,110,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/8
+ switchport trunk allowed vlan 10,30,80,90,100,110,130
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/9
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/10 
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/11
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/12
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/13
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/19
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/23
+ switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130,140
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/24
+ switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130,140
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 10.10.255.14 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no switchport
+ ip address 10.10.255.22 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+mac-address 000c.8593.5a01
+ ip address 10.10.9.67 255.255.255.224
+ ip helper-address 10.10.9.100
+ standby 10 ip 10.10.9.65
+ standby 10 preempt
+!
+interface Vlan20
+ mac-address 000c.8593.5a02
+ ip address 10.10.8.131 255.255.255.192
+ ip helper-address 10.10.9.100
+ standby 20 ip 10.10.8.129
+ standby 20 preempt
+!
+interface Vlan30
+ mac-address 000c.8593.5a03
+ ip address 10.10.6.3 255.255.255.128
+ ip helper-address 10.10.9.100
+ standby 30 ip 10.10.6.1
+ standby 30 preempt
+!
+interface Vlan40
+ mac-address 000c.8593.5a04
+ ip address 10.10.4.3 255.255.255.0
+ ip helper-address 10.10.9.100
+ standby 40 ip 10.10.4.1
+ standby 40 preempt
+!
+interface Vlan50
+ mac-address 000c.8593.5a05
+ ip address 10.10.6.131 255.255.255.128
+ ip helper-address 10.10.9.100
+ standby 50 ip 10.10.6.129
+ standby 50 preempt
+!
+interface Vlan60
+ mac-address 000c.8593.5a06
+ ip address 10.10.0.3 255.255.254.0
+ ip helper-address 10.10.9.100
+ standby 60 ip 10.10.0.1
+ standby 60 preempt
+!
+interface Vlan70
+ mac-address 000c.8593.5a07
+ ip address 10.10.7.3 255.255.255.128
+ ip helper-address 10.10.9.100
+ standby 70 ip 10.10.7.1
+ standby 70 preempt
+!
+interface Vlan80
+ mac-address 000c.8593.5a08
+ ip address 10.10.9.99 255.255.255.224
+ standby 80 ip 10.10.9.97
+ standby 80 preempt
+!
+interface Vlan90
+ mac-address 000c.8593.5a09
+ ip address 10.10.7.131 255.255.255.128
+ ip helper-address 10.10.9.100
+ standby 90 ip 10.10.7.129
+ standby 90 preempt
+!
+interface Vlan100
+ mac-address 000c.8593.5a0a
+ ip address 10.10.2.3 255.255.254.0
+ ip helper-address 10.10.9.100
+ standby 100 ip 10.10.2.1
+ standby 100 preempt
+!
+interface Vlan110
+ mac-address 000c.8593.5a0b
+ ip address 10.10.5.3 255.255.255.0
+ ip helper-address 10.10.9.100
+ ip access-group GUEST-ZT in
+ standby 110 ip 10.10.5.1
+ standby 110 preempt
+!
+interface Vlan120
+ mac-address 000c.8593.5a0c
+ ip address 10.10.8.195 255.255.255.192
+ ip helper-address 10.10.9.100
+ ip access-group CCTV-ZT in
+ standby 120 ip 10.10.8.193
+ standby 120 preempt
+!
+interface Vlan130
+mac-address 000c.8593.5a0d
+ ip address 10.10.8.3 255.255.255.128
+ ip helper-address 10.10.9.100
+ ip access-group IOT-ZT in
+ standby 130 ip 10.10.8.1
+ standby 130 preempt
+!
+interface Vlan140
+ mac-address 000c.8593.5a0e
+ ip address 10.10.9.3 255.255.255.192
+ ip helper-address 10.10.9.100
+ standby 140 ip 10.10.9.1
+ standby 140 preempt
+!
+router ospf 1
+ router-id 4.4.4.4
+ log-adjacency-changes
+ passive-interface default
+ no passive-interface GigabitEthernet0/1
+ no passive-interface GigabitEthernet0/2
+ network 10.10.0.0 0.0.255.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list extended GUEST-ZT
+ permit udp any host 10.10.9.100 eq domain
+ permit udp any host 10.10.9.100 eq bootps
+ permit ip 10.10.5.0 0.0.0.255 10.10.5.0 0.0.0.255
+ deny ip 10.10.5.0 0.0.0.255 10.10.0.0 0.0.255.255
+ permit ip any any
+ip access-list extended IOT-ZT
+ permit udp 10.10.8.0 0.0.0.127 host 10.10.9.100 eq domain
+ permit ip 10.10.8.0 0.0.0.127 host 10.10.9.105
+ permit udp 10.10.8.0 0.0.0.127 host 10.10.9.100 eq bootps
+ permit ip 10.10.8.0 0.0.0.127 10.10.8.0 0.0.0.127
+ deny ip 10.10.8.0 0.0.0.127 10.10.0.0 0.0.255.255
+ permit ip any any
+ip access-list extended GUEST-ACL
+ deny ip 10.10.5.0 0.0.0.255 10.10.0.0 0.0.255.255
+ permit ip 10.10.5.0 0.0.0.255 any
+ip access-list extended CCTV-ZT
+ permit udp 10.10.8.192 0.0.0.63 host 10.10.9.100 eq domain
+ permit ip 10.10.8.192 0.0.0.63 host 10.10.9.106
+ permit udp 10.10.8.192 0.0.0.63 host 10.10.9.100 eq bootps
+ permit ip 10.10.8.192 0.0.0.63 10.10.8.192 0.0.0.63
+ deny ip 10.10.8.192 0.0.0.63 10.10.0.0 0.0.255.255
+ permit ip any any
+access-list 190 permit ip 10.10.7.128 0.0.0.127 any
+!
+!
+!
+!
+!
+snmp-server community ULMON RO
+!
+logging 10.10.9.103
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 10.10.9.103
+!
+end
+

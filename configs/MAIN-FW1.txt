@@ -1,0 +1,87 @@
+MAIN-FW1#show running-config
+ASA Version 8.4(2)
+!
+hostname MAIN-FW1
+names
+!
+interface Ethernet0/0
+ switchport access vlan 2
+!
+interface Ethernet0/1
+!
+interface Ethernet0/2
+ shutdown
+!
+interface Ethernet0/3
+ shutdown
+!
+interface Ethernet0/4
+ shutdown
+!
+interface Ethernet0/5
+ shutdown
+!
+interface Ethernet0/6
+ shutdown
+!
+interface Ethernet0/7
+ shutdown
+!
+interface Vlan1
+ nameif inside
+ security-level 100
+ ip address 10.10.255.1 255.255.255.248
+!
+interface Vlan2
+ nameif outside
+ security-level 0
+ ip address 172.16.1.2 255.255.255.252
+!
+object network CAMPUS-NET
+ subnet 10.10.0.0 255.255.0.0
+ nat (inside,outside) dynamic interface
+object network MAIN-CAMPUS
+ subnet 10.10.0.0 255.255.0.0
+object network SATELLITE-CAMPUS
+ subnet 10.20.0.0 255.255.0.0
+!
+route inside 10.10.0.0 255.255.0.0 10.10.255.2 1
+route outside 0.0.0.0 0.0.0.0 172.16.1.1 1
+!
+access-list OUTSIDE-IN extended permit ip 10.20.0.0 255.255.0.0 10.10.0.0 255.255.0.0
+access-list VPN-TRAFFIC extended permit ip 10.10.0.0 255.255.0.0 10.20.0.0 255.255.0.0
+!
+!
+access-group OUTSIDE-IN in interface outside
+!
+!
+!
+!
+!
+telnet timeout 5
+ssh 10.10.9.64 255.255.255.224 inside
+ssh timeout 5
+!
+dhcpd auto_config outside
+!
+dhcpd address 192.168.1.5-192.168.1.36 inside
+dhcpd enable inside
+!
+!
+!
+crypto ipsec ikev1 transform-set CAMPUS-SET esp-aes esp-sha-hmac
+!
+crypto map CAMPUS-MAP 10 match address VPN-TRAFFIC
+crypto map CAMPUS-MAP 10 set peer 172.16.0.6 
+crypto map CAMPUS-MAP 10 set ikev1 transform-set CAMPUS-SET 
+crypto map CAMPUS-MAP interface outside
+crypto ikev1 enable outside
+crypto ikev1 policy 10
+ encr aes
+ authentication pre-share
+ group 2
+!
+tunnel-group 172.16.0.6 type ipsec-l2l
+tunnel-group 172.16.0.6 ipsec-attributes
+ ikev1 pre-shared-key <REDACTED>
+!

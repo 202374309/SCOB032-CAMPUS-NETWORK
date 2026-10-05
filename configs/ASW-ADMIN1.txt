@@ -1,0 +1,187 @@
+ASW-ADMIN1#show running-config
+Building configuration...
+
+Current configuration : 3347 bytes
+!
+version 15.0
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname ASW-ADMIN1
+!
+enable secret  <REDACTED>
+!
+!
+!
+!
+!
+aaa new-model
+!
+aaa authentication dot1x default group radius 
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name unilim.local
+!
+username netadmin  <REDACTED>
+!
+!
+!
+dot1x system-auth-control
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ dot1x pae authenticator
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/4
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/5
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/6
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/7
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/8
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/9
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/10
+ switchport trunk native vlan 10
+ switchport trunk allowed vlan 10,30,100,110,130
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 20
+ switchport mode access
+ switchport voice vlan 90
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/12
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/13
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/19
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/23
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/24
+ description UNUSED-SECURED
+ shutdown
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 10,20,30,80,90,100,110,130
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport trunk allowed vlan 10,20,30,80,90,100,110,130
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 10.10.9.71 255.255.255.224
+!
+ip default-gateway 10.10.9.65
+!
+logging 10.10.9.103
+radius-server host 10.10.9.102 auth-port 1645
+radius-server key  <REDACTED>
+!
+!
+snmp-server community <REDACTED> RO
+!
+line con 0
+!
+line vty 0 4
+ transport input ssh
+line vty 5 15
+ transport input ssh
+!
+!
+!
+ntp server 10.10.9.103
+!   
+end

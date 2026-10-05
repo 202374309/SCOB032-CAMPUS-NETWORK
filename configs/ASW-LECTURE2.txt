@@ -1,0 +1,168 @@
+ASW-LECTURE2#show running-config
+Building configuration...
+
+Current configuration : 2934 bytes
+!
+version 15.0
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname ASW-LECTURE2
+!
+enable secret <REDACTED>
+!
+!
+!
+ip ssh version 2
+ip domain-name unilim.local
+!
+username netadmin secret <REDACTED>
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/4
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/5
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/6
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/7
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/8
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/9
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/10
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/11
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/12
+ switchport access vlan 120
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/13
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/19
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/23
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/24
+ description UNUSED-SECURED
+ shutdown
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 10,40,120
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport trunk allowed vlan 10,40,120
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+logging 10.10.9.103
+!
+!
+snmp-server community <REDACTED> RO
+!
+line con 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 10.10.9.103
+!
+end

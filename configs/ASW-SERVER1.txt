@@ -1,0 +1,195 @@
+ASW-SERVER1#show running-config
+Building configuration...
+
+Current configuration : 4040 bytes
+!
+version 15.0
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname ASW-SERVER1
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name unilim.local
+!
+
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/7
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/8
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/9
+ switchport access vlan 80
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/10
+ switchport trunk native vlan 10
+ switchport trunk allowed vlan 10,30,100,110,130
+ switchport mode trunk
+!
+interface FastEthernet0/11
+ switchport access vlan 90
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 110
+ switchport mode access
+!
+interface FastEthernet0/13
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/19       
+description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/23
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/24
+ description UNUSED-SECURED
+ shutdown
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 10,30,80,90,100,110,120,130
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport trunk allowed vlan 10,30,80,90,100,110,120,130
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+logging 10.10.9.103
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 10.10.9.103
+!
+end

@@ -19,4 +19,4 @@ The diagrams provide a visual representation of the network design implemented a
 
 The following diagram shows the complete Campus Network implemented in Cisco Packet Tracer, including the core, distribution and access layers, campus buildings, server infrastructure, security devices, WAN connection and satellite campus.
 
-![Overall Smart Campus Network Topology](CAMPUS TOPOLOGY.png)
+![Overall Smart Campus Network Topology](CAMPUS-TOPOLOGY.png)

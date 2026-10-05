@@ -1,0 +1,211 @@
+CORE-SW1#show running-config
+Building configuration...
+
+Current configuration : 3173 bytes
+!
+version 12.2(37)SE1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname CORE-SW1
+!
+!
+no profinet
+enable secret 5 $1$mERr$WKi/TnLpBM5ABxPqXWp33/
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+username netadmin secret 5 $1$mERr$y.po3dB8iHh//AT/iTgKD/
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name unilim.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ no switchport
+ ip address 10.10.255.2 255.255.255.248
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/2
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/3
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/4
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/5
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/6
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/7
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/8
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/9
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/10
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/11 
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/12
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/13
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/14
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/15
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/16
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/17
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/18
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/19
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/20
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/21
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/22
+ description UNUSED-SECURED
+ shutdown
+!
+interface FastEthernet0/23
+ no switchport
+ ip address 10.10.255.25 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/24
+ no switchport
+ ip address 10.10.255.29 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 10.10.255.9 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+no switchport
+ ip address 10.10.255.13 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ passive-interface default
+ no passive-interface FastEthernet0/23
+ no passive-interface FastEthernet0/24
+ no passive-interface GigabitEthernet0/1
+ no passive-interface GigabitEthernet0/2
+ network 10.10.255.0 0.0.0.255 area 0
+ default-information originate
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.10.255.1 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+snmp-server community ULMON RO
+!
+logging 10.10.9.103
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 10.10.9.103
+!
+end
